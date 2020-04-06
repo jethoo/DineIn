@@ -1,0 +1,47 @@
+@model IEnumerable<dineIN.Models.Dishes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DishId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishDetails)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DishId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DishName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DishDetails)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DishName">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DishName">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DishName">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

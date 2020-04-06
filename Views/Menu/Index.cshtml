@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Food Menu";
+}
+
+<h2>Food Lists</h2>
+
+<table id="menuTable">
+    <thead>
+        <tr>
+            <th>Dish Id</th>
+            <th>Dish Name</th>
+            <th>Dish Details</th>
+        </tr>
+    </thead>
+</table>
+
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+@section scripts {
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#menuTable").DataTable({
+                "ajax": {
+                    "url": "/Menu",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Dish Id" },
+                    { "data": "Dish Name" },
+                    { "data": "Dish Details" }
+                ]
+            });
+        });
+    </script>
+}
