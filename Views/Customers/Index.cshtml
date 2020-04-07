@@ -1,20 +1,22 @@
 @model IEnumerable<dineIN.Models.Customers>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Index</h1>
 
+<h1 class="customers">"Select Your Favorite Dish From Our Menu"</h1>
+<hr />
+<p>You can have only one Favorite Dish per Account</p>
+<hr/>
+<p >Then, Go to Reservations and Book a Table and Time</p>
+<hr/>
+<p >Welcome To Our Restaurant</p>
+<hr/>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -22,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DishNameNavigation)
+                @Html.DisplayNameFor(model => model.DishName)
             </th>
             <th></th>
         </tr>
@@ -30,9 +32,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>

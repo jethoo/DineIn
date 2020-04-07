@@ -7,7 +7,6 @@
 <table id="menuTable">
     <thead>
         <tr>
-            <th>Dish Id</th>
             <th>Dish Name</th>
             <th>Dish Details</th>
         </tr>
@@ -23,14 +22,14 @@
         $(document).ready(function () {
             $("#menuTable").DataTable({
                 "ajax": {
-                    "url": "/Menu",
+                    "url": "/Menu/GetList",
                     "type": "GET",
                     "datatype": "json"
                 },
                 "columns": [
-                    { "data": "Dish Id" },
-                    { "data": "Dish Name" },
-                    { "data": "Dish Details" }
+                    { "data": "dishName" },
+                    { "data": "dishDetails" },
+                   
                 ]
             });
         });

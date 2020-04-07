@@ -20,13 +20,29 @@ namespace dineIN.Controllers
         }
 
         // GET: Customers
-        [Authorize(Roles = "admin,user")]
+        //To see their Favorite dish and their personal profile details
+        //user should be logged in first
+        //only admin can see all the customers
+        
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var dINE_INContext = _context.Customers.Include(c => c.DishNameNavigation);
-            return View(await dINE_INContext.ToListAsync());
+            
+          if (User.IsInRole("admin") || User.IsInRole("cashier"))
+            {
+                var dINE_INContext = _context.Customers.Include(c => c.DishNameNavigation);
+                return View(await dINE_INContext.ToListAsync());
+            }
+            else
+            {
+                var dINE_INContext = _context.Customers.Include(c => c.DishNameNavigation);
+                return View(await dINE_INContext.Where(x => x.Email == User.Identity.Name).ToListAsync());
+            }
+                
         }
 
+
+    
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(string id)
         {

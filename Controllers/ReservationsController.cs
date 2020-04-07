@@ -21,11 +21,23 @@ namespace dineIN.Controllers
 
 
         // GET: Reservations
-        [Authorize(Roles = "admin,cashier")]
+        //To see their Reservation
+        //user should be logged in first
+        //only admin and role as cashier can see all the customers
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var dINE_INContext = _context.Reservations.Include(r => r.EmailNavigation);
-            return View(await dINE_INContext.ToListAsync());
+            if (User.IsInRole("admin") || User.IsInRole("cashier"))
+            {
+                var dINE_INContext = _context.Reservations.Include(r => r.EmailNavigation);
+                return View(await dINE_INContext.ToListAsync());
+            }
+            else
+            {
+                var dINE_INContext = _context.Reservations.Include(r => r.EmailNavigation);
+                return View(await dINE_INContext.Where(x => x.Email == User.Identity.Name).ToListAsync());
+            }
+
         }
 
         // GET: Reservations/Details/5
@@ -61,6 +73,7 @@ namespace dineIN.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ReservationId,Date,Email,Table")] Reservations reservations)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(reservations);
